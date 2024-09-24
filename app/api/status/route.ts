@@ -7,7 +7,6 @@ type HPCEndpointResponse = {
 }
 
 export async function GET() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const endpoints = (await getHPCEndpoint()).endpoints;
     console.log(endpoints)
     if (endpoints.length === 0) {
@@ -22,7 +21,7 @@ export async function GET() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function getHPCEndpoint(): Promise<HPCEndpointResponse> {
   const response = await fetch("https://api.ngrok.com/endpoints", {
-
+    cache: "no-store",
     headers: {
         "Authorization": `Bearer ${process.env.NGROK_API_KEY}`,
         "Ngrok-Version": "2"
